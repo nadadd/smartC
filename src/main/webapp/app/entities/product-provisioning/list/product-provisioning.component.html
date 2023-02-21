@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductProvisioningHeading">
+    <span jhiTranslate="frontEndApp.productProvisioning.home.title">Product Provisionings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="frontEndApp.productProvisioning.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product-provisioning"
+        [routerLink]="['/product-provisioning/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="frontEndApp.productProvisioning.home.createLabel"> Create a new Product Provisioning </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="productProvisionings?.length === 0">
+    <span jhiTranslate="frontEndApp.productProvisioning.home.notFound">No Product Provisionings found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="productProvisionings && productProvisionings.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="quantite">
+            <div class="d-flex">
+              <span jhiTranslate="frontEndApp.productProvisioning.quantite">Quantite</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateProcuration">
+            <div class="d-flex">
+              <span jhiTranslate="frontEndApp.productProvisioning.dateProcuration">Date Procuration</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="product.id">
+            <div class="d-flex">
+              <span jhiTranslate="frontEndApp.productProvisioning.product">Product</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let productProvisioning of productProvisionings; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product-provisioning', productProvisioning.id, 'view']">{{ productProvisioning.id }}</a>
+          </td>
+          <td>{{ productProvisioning.quantite }}</td>
+          <td>{{ productProvisioning.dateProcuration | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="productProvisioning.product">
+              <a [routerLink]="['/product', productProvisioning.product.id, 'view']">{{ productProvisioning.product.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product-provisioning', productProvisioning.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/product-provisioning', productProvisioning.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(productProvisioning)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

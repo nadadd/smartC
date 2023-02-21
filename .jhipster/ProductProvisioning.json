@@ -1,0 +1,35 @@
+{
+  "applications": ["generatestuff", "FrontEnd"],
+  "changelogDate": "20230216155246",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product_provisioning",
+  "fields": [
+    {
+      "fieldName": "quantite",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateProcuration",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "ProductProvisioning Entity :changer le stock d'un fournisseur",
+  "jpaMetamodelFiltering": false,
+  "name": "ProductProvisioning",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "javadoc": "Un Approvisionnement a plusieur produit",
+      "otherEntityName": "product",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,135 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading" jhiTranslate="frontEndApp.product.home.createOrEditLabel">
+        Create or edit a Product
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="frontEndApp.product.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="frontEndApp.product.totalQuantite" for="field_totalQuantite">Total Quantite</label>
+          <input
+            type="number"
+            class="form-control"
+            name="totalQuantite"
+            id="field_totalQuantite"
+            data-cy="totalQuantite"
+            formControlName="totalQuantite"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="frontEndApp.product.prixBase" for="field_prixBase">Prix Base</label>
+          <input type="number" class="form-control" name="prixBase" id="field_prixBase" data-cy="prixBase" formControlName="prixBase" />
+          <div *ngIf="editForm.get('prixBase')!.invalid && (editForm.get('prixBase')!.dirty || editForm.get('prixBase')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('prixBase')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('prixBase')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="frontEndApp.product.etat" for="field_etat">Etat</label>
+          <select class="form-control" name="etat" formControlName="etat" id="field_etat" data-cy="etat">
+            <option [ngValue]="null">{{ 'frontEndApp.ProductState.null' | translate }}</option>
+            <option *ngFor="let productState of productStateValues" [value]="productState">
+              {{ 'frontEndApp.ProductState.' + productState | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('etat')!.invalid && (editForm.get('etat')!.dirty || editForm.get('etat')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('etat')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="frontEndApp.product.dateAjout" for="field_dateAjout">Date Ajout</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAjout"
+              data-cy="dateAjout"
+              type="datetime-local"
+              class="form-control"
+              name="dateAjout"
+              formControlName="dateAjout"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="frontEndApp.product.fournisseur" for="field_fournisseur">Fournisseur</label>
+          <select
+            class="form-control"
+            id="field_fournisseur"
+            data-cy="fournisseur"
+            name="fournisseur"
+            formControlName="fournisseur"
+            [compareWith]="compareFournisseur"
+          >
+            <option *ngIf="!editForm.get('fournisseur')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="fournisseurOption" *ngFor="let fournisseurOption of fournisseursSharedCollection">
+              {{ fournisseurOption.id }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['fournisseur'])!.invalid && (editForm.get(['fournisseur'])!.dirty || editForm.get(['fournisseur'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['fournisseur'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

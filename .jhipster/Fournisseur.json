@@ -1,0 +1,29 @@
+{
+  "applications": ["generatestuff", "FrontEnd"],
+  "changelogDate": "20230216155046",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "fournisseur",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Fournisseur",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "javadoc": "Un Fournisseur est un client",
+      "otherEntityName": "user",
+      "ownerSide": true,
+      "relationshipName": "client",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

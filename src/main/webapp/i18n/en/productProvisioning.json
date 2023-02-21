@@ -1,0 +1,26 @@
+{
+  "frontEndApp": {
+    "productProvisioning": {
+      "home": {
+        "title": "Product Provisionings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Provisioning",
+        "createOrEditLabel": "Create or edit a Product Provisioning",
+        "notFound": "No Product Provisionings found"
+      },
+      "created": "A new Product Provisioning is created with identifier {{ param }}",
+      "updated": "A Product Provisioning is updated with identifier {{ param }}",
+      "deleted": "A Product Provisioning is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Provisioning {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Provisioning"
+      },
+      "id": "ID",
+      "quantite": "Quantite",
+      "dateProcuration": "Date Procuration",
+      "product": "Product"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "applications": ["generatestuff", "FrontEnd"],
+  "changelogDate": "20230216155146",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalQuantite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "prixBase",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "ProductState",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "OUT_OF_STOCK,IN_STOCK,DEMANDE"
+    },
+    {
+      "fieldName": "dateAjout",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Product Entity : ajouter des produits a un fournisseur",
+  "jpaMetamodelFiltering": true,
+  "name": "Product",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "javadoc": "Un Fournisseur a plusieur produit",
+      "otherEntityName": "fournisseur",
+      "relationshipName": "fournisseur",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}
