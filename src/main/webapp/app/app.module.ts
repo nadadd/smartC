@@ -26,19 +26,20 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
-import { AppComponentCssComponent } from './app.component.css/app.component.css.component';
-import { AppComponentScssComponent } from './app.component.scss/app.component.scss.component';
-import { AppComponentHtmlComponent } from './app.component.html/app.component.html.component';
-import { AppComponentSpecTsComponent } from './app.component.spec.ts/app.component.spec.ts.component';
-import { AppComponentTsComponent } from './app.component.ts/app.component.ts.component';
-import { ComponentComponent } from './component/component.component';
+
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { MatSlideToggleModule } from '@angular/material';
+
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     HomeModule,
+    FontAwesomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     AppRoutingModule,
     // Set this to true to enable service worker (PWA)
@@ -54,7 +55,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     FindLanguageFromKeyPipe,
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, AppComponentCssComponent, AppComponentScssComponent, AppComponentHtmlComponent, AppComponentSpecTsComponent, AppComponentTsComponent, ComponentComponent, SidebarComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, SidebarComponent, HeaderComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

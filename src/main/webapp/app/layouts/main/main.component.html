@@ -2,8 +2,60 @@
 
 <div>
   <router-outlet name="navbar"></router-outlet>
-  
+  <div class="navbar">
+    <!-- Contenu de la navbar -->
+    <!--sidebar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+          <!-- Icon dropdown -->
+          <li mdbDropdown class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              mdbDropdownToggle
+              aria-expanded="false"
+            >
+              <i class="flag-united-kingdom flag m-0"></i>
+            </a>
+            <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>LOGO
+                  <i class="fa fa-check text-success ms-2"></i></a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Dashboard</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-china flag"></i>Approvisionnement</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>Produits</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Boutiques</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+
+
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Recherche...">
+
+  </div>
+
 </div>
+
 
 <div class="container-fluid">
   <div class="card jh-card">
@@ -12,3 +64,4 @@
 
   <jhi-footer></jhi-footer>
 </div>
+
